@@ -1,0 +1,39 @@
+div#rc_carousel {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+div#rc_carousel div.rc_coursename {
+    text-align: center;
+}
+
+div#rc_carousel div.rc_coursename a {
+    margin: 0 auto;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+div#rc_carousel div.rc_courseimage {
+    min-height: 200px;
+}
+
+div#rc_carousel ol.carousel-indicators {
+    bottom: 4px;
+}
+
+div#rc_carousel ol.carousel-indicators li {
+    border: 1px solid #B7B7B7;
+    background-color: #CCC;
+}
+
+div#rc_carousel ol.carousel-indicators li.active {
+    background-color: #FFF;
+}
+
+a.rc_carousel_next {
+    float: right;
+}
+
+a.rc_nav {
+    font-size: 2em;
+}
