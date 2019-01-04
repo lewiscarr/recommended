@@ -24,6 +24,6 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2018121300;
+$plugin->version   = 2019010300;
 $plugin->requires  = 2018050800;
 $plugin->component = 'block_recommendedcourses';

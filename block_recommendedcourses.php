@@ -52,46 +52,29 @@ class block_recommendedcourses extends block_base {
         $this->content->text = '';
         $this->content->footer = '';
 
+        $this->page->requires->css(new moodle_url('/blocks/recommendedcourses/css/slick.css'));
+        $this->page->requires->css(new moodle_url('/blocks/recommendedcourses/css/slick-theme.css'));
         $this->page->requires->jquery();
-        $this->page->requires->js('/blocks/recommendedcourses/bootstrap337/js/bootstrap.min.js');
-        $this->page->requires->css('/blocks/recommendedcourses/bootstrap337/css/bootstrap.min.css');
-        $output = html_writer::start_tag('div', array('id' => 'rc_carousel', 'class' => 'carousel slide',
-                                                        'data-ride' => 'carousel'));
+        $this->page->requires->js(new moodle_url('/blocks/recommendedcourses/js/slick.min.js'), true);
+        $this->page->requires->js(new moodle_url('/blocks/recommendedcourses/js/carousel.js'));
 
-        $indicators = '';
+        $output = '';
+
+        $output .= html_writer::start_tag('div', array('id' => 'rc_carousel'));
+
         $items = '';
-        $counter = 0;
         foreach ($courses as $course) {
             $class = '';
-            if ($counter === 0) {
-                $class = ' active';
-            }
-            $indicators .= html_writer::tag('li', '', array('data-target' => '#rc_carousel', 'data-slide-to' => $counter,
-                                                            'class' => ltrim($class)));
+
             $image = $this->get_course_content_image($course);
             $courseurl = new moodle_url('/course/view.php', array('id' => $course->id));
             $coursename = html_writer::tag('div', html_writer::link($courseurl, $course->fullname),
                                             array('class' => 'rc_coursename'));
-            $items .= html_writer::tag('div', $coursename . $image, array('class' => 'item' . $class));
-            $counter++;
+            $items .= html_writer::tag('div', $coursename . $image, array('class' => 'carouselitem'));
         }
 
         // Carousel items.
-        $output .= html_writer::start_tag('div', array('class' => 'carousel-inner'));
         $output .= $items;
-        $output .= html_writer::end_tag('div');
-
-        // Carousel indicators.
-        $output .= html_writer::start_tag('ol', array('class' => 'carousel-indicators'));
-        $output .= $indicators;
-        $output .= html_writer::end_tag('ol');
-
-        // Carousel controls.
-        $spanleft = html_writer::tag('span', '', array('class' => 'glyphicon glyphicon-chevron-left'));
-        $output .= html_writer::link('#rc_carousel', $spanleft, array('data-slide' => 'prev', 'class' => 'rc_nav'));
-        $spanright = html_writer::tag('span', '', array('class' => 'glyphicon glyphicon-chevron-right'));
-        $output .= html_writer::link('#rc_carousel', $spanright,
-                                        array('data-slide' => 'next', 'class' => 'rc_nav rc_carousel_next'));
 
         $output .= html_writer::end_tag('div');
 
